@@ -61,7 +61,7 @@ cur_ver=
 
 [[ -f $mydir"/VER" ]] && cur_ver=`cat $mydir"/VER"`
 
-new_ver=`curl -j -f -s https://raw.githubusercontent.com/minershive/hiveos-pxe-diskless/master/pxeserver/VER`
+new_ver=`curl -j -f -s https://raw.githubusercontent.com/TheJames5/hiveos-pxe-diskless/master/pxeserver/VER`
 if [[ $? -ne 0 || -z $new_ver || -z $cur_ver || $new_ver != $cur_ver ]]; then
 	check_version $cur_ver $new_ver
 	case $? in

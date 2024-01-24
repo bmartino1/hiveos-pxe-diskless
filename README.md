@@ -1,5 +1,25 @@
 # Hive OS PXE Diskless
-Network boot for diskless rigs
+Network boot for diskless BC-250 Rigs
+
+This is just a temperorary fix while HiveOs gets off their asses, check if they've fixed.
+
+This is a modified version of the Hiveos Pxe diskless to work with BC-250 Mining cards. 
+The opencl version in hiveramfs says its 21.40.1 but its actually version 22.20 with rocm and fully is compatiable with the BC-250. 
+
+Before you start, it took me a bit of time to figure this out, no thanks to the hive devs so i’d be much appreciate if you donated a little wart. (I did save you a lot in nvme’s 🙂)
+09485c66d358f2178e479aa07fb668a4d7bffb48c8c0cf69
+Thanks, James. 
+
+Copy the install link below 
+Then build the Ubuntu18 with ./deploy_pxe ubuntu18 --build (it will take awhile)
+then re run ./pxe_setup.sh
+
+Other Notes
+
+Do not use ./deploy_pxe ubuntu18 --upgrade it will break the permissions on the BC-250 Rig. 
+
+In BC-250 Bios change network boot to enable and Ipv4 PXE (Http isnt used do not enable)
+In bios you can enable SVM if needed (but does not make a difference) but do not enable IOMMU it will not work.
 
 Documentation
 https://forum.hiveos.farm/t/hive-os-diskless-pxe/12319
@@ -9,7 +29,7 @@ Requires : sudo, xz-utils, pxz
 
 For installation directly from the GitHub, execute the following command in the terminal:
 
-```wget https://raw.githubusercontent.com/minershive/hiveos-pxe-diskless/master/pxe-setup.sh && sudo bash pxe-setup.sh```
+```wget https://raw.githubusercontent.com/TheJames5/hiveos-pxe-diskless/master/pxe-setup.sh && sudo bash pxe-setup.sh```
 
 ```cd  path_to_pxeserver```
 
