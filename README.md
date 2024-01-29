@@ -21,6 +21,26 @@ Do not use ./deploy_pxe ubuntu18 --upgrade it will break the permissions on the 
 In BC-250 Bios change network boot to enable and Ipv4 PXE (Http isnt used do not enable)
 In bios you can enable SVM if needed (but does not make a difference) but do not enable IOMMU it will not work.
 
+Thank you Rick_IV for clarifing the install!
+"First you have to use the chroot command:
+sudo ./deploy_pxe ubuntu18 --chroot
+
+Once there, check to see if DNS is working by pinging google.com. If you get an IP you're good. If not, the resolv.conf file is symlinked and most likely missing. Run the following to add the correct resolv.conf:
+
+mkdir /run/resolvconf && touch /run/resolvconf/resolv.conf && echo 'nameserver 8.8.4.4' > /run/resolvconf/resolv.conf
+
+Now you should be able to ping google and get an ip. Next, cd into /hive/sbin and run this:
+
+./amd-ocl-install 22.02
+
+Then it might be a good idea to install any miners that you would want to have as part of the default install. Once finished in chroot, type exit and run intrd then the original deploy build command again:
+
+sudo ./deploy_pxe ubuntu18 --initrd
+sudo ./deploy_pxe ubuntu18 --build
+
+I had to stop the inet-utils service and restart atfpt service to get it to serve the OS."
+
+
 Documentation
 https://forum.hiveos.farm/t/hive-os-diskless-pxe/12319
 
